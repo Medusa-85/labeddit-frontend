@@ -1,9 +1,9 @@
+import { Router } from './routes'
+
 
 const App = () => {
   return (
-    <div>
-      <h1>LABEDDIT</h1>
-    </div>
+    <Router/>
   );
 }
 
