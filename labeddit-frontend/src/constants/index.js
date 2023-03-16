@@ -1,12 +1,18 @@
 import axios from "axios"
 
-export const BASE_URL = 'https://labeddit-backend-kn7y.onrender.com'
+export const BASE_URL = 'https://labeddit-backend-irrb.onrender.com'
 
-
-export const Login = (body) => {
-    return axios.post(`{BASE_URL}/users/login`, body )
+export const Login = async (body) => {
+    const {data} = await axios.post(`${BASE_URL}/users/login`, body )
+    return data
 }
 
-export const Signup = (body) => {
-    return axios.post(`{BASE_URL}/users/signup`, body )
+export const Signup = async (body) => {
+    const {data} = await axios.post(`${BASE_URL}/users/signup`, body )
+    return data
 }
+
+export const validateEmail = email => /[a-zA-Z0-9]+@[a-z0-9]{3}[.a-z]?/.test(email)
+export const validatePassword = password => /.{6,}/.test(password)
+export const validateName = name => /.{3,}/.test(name)
+
