@@ -1,5 +1,10 @@
+import { Header } from "../../components"
+
 export const PostsPage = () => {
     return (
-        <h1>Posts</h1>
+        <>
+            <Header/>
+            <h1>Posts</h1>
+        </>
     )
 }
