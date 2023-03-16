@@ -2,17 +2,16 @@ import { useForm } from "../../hooks/use-form"
 import { PageContainer, FormContainer, EmailInput, PasswordInput } from '../../components'
 import { Button, FormControl, FormErrorMessage, FormHelperText} from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
-import { goToSignupPage } from "../../routes/coordinator"
+import { goToPostsPage, goToSignupPage } from "../../routes/coordinator"
 import logo from "../../assets/logo2.svg"
-import { Login } from '../../constants'
+import { Login, validateEmail, validatePassword } from '../../constants'
 import { useState } from "react"
-import axios from "axios"
 
 export const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const [form, onChangeInputs, clearInputs] = useForm({
+    const [form, onChangeInputs] = useForm({
         email: "",
         password: ""
     })
@@ -20,12 +19,21 @@ export const LoginPage = () => {
     const [isEmailValid, setIsEmailValid] = useState(true)
     const [isPasswordValid, setIsPasswordValid] = useState(true)
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        //Login
-        console.log(form)
-        setIsEmailValid(/[a-zA-Z0-9]+@[a-z0-9]{3}[.a-z]?/.test(form.email))
-        setIsPasswordValid(/.{6,}/.test(form.password))    
+        setIsEmailValid(validateEmail(form.email))
+        setIsPasswordValid(validatePassword(form.password))
+        try{
+            const { token } = isEmailValid && isPasswordValid && await Login({
+                email: form.email,
+                password: form.password
+            })
+            localStorage.setItem("labeddit.token", token)
+            goToPostsPage(navigate)
+        } catch (e) {
+            console.log(e)
+            alert(e.response.data)
+        }
     }
 
     return (

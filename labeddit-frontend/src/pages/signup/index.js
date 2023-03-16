@@ -1,22 +1,43 @@
 import { useForm } from "../../hooks/use-form"
 import { PageContainer, FormContainer, EmailInput, PasswordInput, NameInput, Header } from '../../components'
-import { Button} from '@chakra-ui/react'
+import { Button, FormControl, FormHelperText} from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
-//import { goToSignupPage } from "../../routes/coordinator"
+import { validateName, validateEmail, validatePassword, Signup } from '../../constants'
+import { useState } from "react"
+import { goToPostsPage } from "../../routes"
 
 export const SignupPage = () => {
 
     const navigate = useNavigate()
 
-    const [form, onChangeInputs, clearInputs] = useForm({
+    const [form, onChangeInputs] = useForm({
         name: "",
         email: "",
         password: ""
     })
 
-    const onSubmit = (e) => {
+    const [isNameValid, setIsNameValid] = useState(true)
+    const [isEmailValid, setIsEmailValid] = useState(true)
+    const [isPasswordValid, setIsPasswordValid] = useState(true)
+
+    const onSubmit = async (e) => {
         e.preventDefault()
-        console.log(form)
+        setIsNameValid(validateName(form.name))
+        setIsEmailValid(validateEmail(form.email))
+        setIsPasswordValid(validatePassword(form.password))
+        try{
+            const { token } = isNameValid && isEmailValid && isPasswordValid && await Signup({
+                name: form.name,
+                email: form.email,
+                password: form.password
+            })
+            console.log(token)
+            localStorage.setItem("labeddit.token", token)
+            goToPostsPage(navigate)
+        } catch (e) {
+            console.log(e)
+            alert(e.response.data)
+        }
     }
 
     return (
@@ -25,10 +46,17 @@ export const SignupPage = () => {
             <FormContainer>
                 <form onSubmit={onSubmit}>
                     <h1>Olá, boas vindas ao LabEddit ;)</h1>
-                    <NameInput
-                        value={form.name}
-                        onChange={onChangeInputs}
-                    />
+                    <FormControl>
+                        <NameInput
+                            value={form.name}
+                            onChange={onChangeInputs}
+                        />
+                        {!isNameValid ? (
+                            <FormHelperText>
+                            Apelido precisa ter pelo menos 3 caracteres.
+                            </FormHelperText    >
+                        ) : undefined }
+                    </FormControl>
                     <EmailInput
                         value={form.email}
                         onChange={onChangeInputs}
