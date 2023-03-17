@@ -1,6 +1,6 @@
 import { useForm } from "../../hooks/use-form"
 import { PageContainer, FormContainer, EmailInput, PasswordInput } from '../../components'
-import { Button, FormControl, FormErrorMessage, FormHelperText} from '@chakra-ui/react'
+import { Button, FormControl, FormHelperText} from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom"
 import { goToPostsPage, goToSignupPage } from "../../routes/coordinator"
 import logo from "../../assets/logo2.svg"

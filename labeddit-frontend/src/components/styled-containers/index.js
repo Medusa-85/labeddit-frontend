@@ -1,23 +1,24 @@
 import styled from "styled-components"
 
 export const PageContainer = styled.div`
-    height: 90vh;
+    height: auto;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ca67d0
+    background-color: #FFFFFF
 `;
 
 export const FormContainer = styled.div`
+    margin-top: 133px;
     min-width: 40vw;
     max-width: 98vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: #fbe19b;
+    background-color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
 
@@ -38,4 +39,14 @@ export const FormContainer = styled.div`
         gap: 10px;
         padding: 10px
     }
+`
+
+export const AddContentBox = styled.div`
+    min-width: 40vw;
+    max-width: 98vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 `
