@@ -7,7 +7,7 @@ export const PageContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ca67d0
+    background-color: #FFFFFF
 `;
 
 export const FormContainer = styled.div`
@@ -38,4 +38,14 @@ export const FormContainer = styled.div`
         gap: 10px;
         padding: 10px
     }
+`
+
+export const AddContentBox = styled.div`
+    min-width: 40vw;
+    max-width: 98vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 `

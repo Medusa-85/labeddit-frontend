@@ -1,3 +1,4 @@
+import { tokenToCSSVar } from "@chakra-ui/react"
 import axios from "axios"
 
 export const BASE_URL = 'https://labeddit-backend-irrb.onrender.com'
@@ -9,6 +10,26 @@ export const Login = async (body) => {
 
 export const Signup = async (body) => {
     const {data} = await axios.post(`${BASE_URL}/users/signup`, body )
+    return data
+}
+
+export const Posts = async () => {
+    const {data} = await axios.get(`${BASE_URL}/posts`, 
+    {
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        } 
+    })
+    return data
+}
+
+export const ReplyContent = async () => {
+    const {data} = await axios.get(`${BASE_URL}/posts`, 
+    {
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        } 
+    })
     return data
 }
 
