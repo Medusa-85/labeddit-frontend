@@ -4,22 +4,44 @@ import { PostCardStyled, PostContainerStyled } from "./styled"
 import { useEffect, useState } from "react"
 import {FaRegCommentAlt} from "react-icons/fa"
 import {TbArrowBigUp, TbArrowBigDown} from "react-icons/tb"
-import { Posts } from "../../constants"
+import { getPosts, CreatePost } from "../../constants"
 import { ContentInput } from "../../components/inputs/content"
 import { Button, Stack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "../../hooks/use-form"
 
 export const PostsPage = () => {
     const navigate = useNavigate()
 
-    const onSubmit = (e) => {
+    const [form, onChangeInputs] = useForm({
+        content: ""
+    })
+
+    const onSubmit = async (e) => {
         e.preventDefault()
+        try{
+            await CreatePost({
+                content: form.content
+            })
+            getPosts()
+            .then(data => {
+                setPosts(data)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+            alert("Comentário postado com sucesso")
+        } catch (e) {
+            console.log(e)
+            alert(e.response.data)
+        }      
     }
 
     const [posts, setPosts] = useState([])
 
+
     useEffect(() => {
-            Posts()
+            getPosts()
             .then(data => {
                 setPosts(data)
             })
@@ -34,7 +56,10 @@ export const PostsPage = () => {
                 <Header/>
                 <form onSubmit={onSubmit}>
                     <AddContentBox>
-                        <ContentInput/>
+                        <ContentInput
+                            value={form.content}
+                            onChange={onChangeInputs}
+                        />
                         <Button 
                             type="submit"
                             variant="addContent"
@@ -43,7 +68,11 @@ export const PostsPage = () => {
                             <PostCardStyled key={i}>
                                 <h3>{post.content}</h3>
                                 <Stack direction='row' spacing={4}>
-                                    <Button leftIcon={<TbArrowBigUp />} rightIcon={<TbArrowBigDown />} colorScheme='teal' variant='contenReaction'>
+                                    <Button 
+                                    leftIcon={<TbArrowBigUp />} 
+                                    rightIcon={<TbArrowBigDown />} 
+                                    colorScheme='teal' 
+                                    variant='contenReaction'>
                                         {post.like}
                                     </Button>
                                     <Button 
