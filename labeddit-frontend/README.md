@@ -21,11 +21,9 @@ npm install
 ```sh
 npm run start
 ```
-## Deploy backend
+## Links
 
-```sh
-https://labeddit-backend-irrb.onrender.com
-```
+*Deploy Backend: [@https:\/\/labeddit-backend-irrb.onrender.com]
 
 ## Author
 
