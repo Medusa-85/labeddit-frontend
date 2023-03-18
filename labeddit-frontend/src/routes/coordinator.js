@@ -4,8 +4,8 @@ export const goToLoginPage = (navigator) => {
 export const goToPostsPage = (navigator) => {
     navigator('/posts')
 }
-export const goToReplyContentPage = (navigator) => {
-    navigator('/reply-content')
+export const goToReplyPage = (navigator) => {
+    navigator('/reply')
 }
 export const goToSignupPage = (navigator) => {
     navigator('/signup')

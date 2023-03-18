@@ -8,7 +8,7 @@ export const PostContainerStyled = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: #fbe19b;
+    background-color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
     height: auto;
@@ -27,6 +27,7 @@ export const PostCardStyled = styled.div`
     max-width: 98vw;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
-    background-color: #FBFBFB;
-    padding: 9px 10px
+    background-color: #FFFFFF;
+    padding: 9px 10px;
+    
 `

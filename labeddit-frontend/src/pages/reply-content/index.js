@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom"
 import { AddContentBox, Header, PageContainer } from "../../components"
 import { PostContainerStyled, PostCardStyled } from "../posts/styled"
 import { useEffect, useState } from "react"
@@ -8,14 +9,15 @@ import { ContentInput } from "../../components/inputs/content"
 import { Button, Stack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 
-export const ReplyContentPage = () => {
+export const ReplyPage = () => {
     const navigate = useNavigate()
+    const {id} = useParams()
 
     const onSubmit = (e) => {
         e.preventDefault()
     }
 
-    const [replyContents, setReplyContents] = useState([])
+    const [replyContents, setReplyContents] = useState([] )
 
     useEffect(() => {
             ReplyContent()

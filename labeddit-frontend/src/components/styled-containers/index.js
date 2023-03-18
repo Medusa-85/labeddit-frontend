@@ -21,6 +21,7 @@ export const FormContainer = styled.div`
     background-color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
+    gap: 12px
 
     input {
         margin-bottom: 10px;
@@ -48,5 +49,6 @@ export const AddContentBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 12px
 
 `
