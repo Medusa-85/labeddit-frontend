@@ -21,9 +21,10 @@ npm install
 ```sh
 npm run start
 ```
-🔗 ##Links 
+## 🔗 Links
 
-* LabEddit-Backend: [@https:\/\/github.com\/Medusa-85\/labeddit-backend.git](https://github.com/Medusa-85/labeddit-backend.git/https:\/\/github.com\/Medusa-85\/labeddit-backend.git)
+### [LabEddit-Backend](https://github.com/Medusa-85/labeddit-backend.git)
+### [Documentação da API](https://documenter.getpostman.com/view/24461431/2s93JxrMAc)
 
 ## Author
 
