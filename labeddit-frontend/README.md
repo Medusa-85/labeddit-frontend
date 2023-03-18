@@ -21,9 +21,9 @@ npm install
 ```sh
 npm run start
 ```
-**Mariana Lima** 
+🔗 ##Links 
 
-* Deploy backend: [@https:\/\/labeddit-backend-irrb.onrender.com](https://labeddit-backend-irrb.onrender.com/https:\/\/labeddit-backend-irrb.onrender.com)
+* LabEddit-Backend: [@https:\/\/github.com\/Medusa-85\/labeddit-backend.git](https://github.com/Medusa-85/labeddit-backend.git/https:\/\/github.com\/Medusa-85\/labeddit-backend.git)
 
 ## Author
 
