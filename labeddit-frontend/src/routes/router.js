@@ -9,15 +9,12 @@ import {
 export const Router = () => {
     return (
         <BrowserRouter>
-            
             <Routes>
-                <Route path="/login" element={<LoginPage/>} />
+                <Route path="/" element={<LoginPage/>} />
                 <Route path="/posts" element={<PostsPage/>} />
-                <Route path="/reply" element={<ReplyPage/>} />
+                <Route path="/posts/:postId" element={<ReplyPage/>} />
                 <Route path="/signup" element={<SignupPage/>} />
             </Routes>
         </BrowserRouter>
     )
 }
-
-//<Header />
