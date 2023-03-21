@@ -1,26 +1,42 @@
 import { AddContentBox, Header, PageContainer } from "../../components"
+import { GlobalContext } from "../../context/GlobalContext"
 import { goToReplyPage } from "../../routes/coordinator"
 import { PostCardStyled, PostContainerStyled } from "./styled"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import {FaRegCommentAlt} from "react-icons/fa"
 import {TbArrowBigUp, TbArrowBigDown} from "react-icons/tb"
-import { getPosts, CreatePost, LikeContent } from "../../constants"
+import { getPosts, CreatePost, LikeContent, BASE_URL } from "../../constants"
 import { ContentInput } from "../../components/inputs/content"
 import { Button, Stack } from "@chakra-ui/react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useForm } from "../../hooks/use-form"
+import axios from "axios"
 
 export const PostsPage = () => {
     const navigate = useNavigate()
+    const context = useContext(GlobalContext)
 
     const [form, onChangeInputs] = useForm({
         content: "",
-        likes: ""
     })
 
-    const onClickLike = async (postId) => {
+    const {id} = useParams()
+
+    const onClickLike = async () => {
         try{
-           await LikeContent()
+            const body = {
+                like: true
+            }
+            await axios.put(`${BASE_URL}/posts/${id}/like`, 
+            body,
+            {
+                headers: {
+                    Authorization: localStorage.getItem("labeddit.token")
+                } 
+            })
+            getPosts()
+            console.log({id})
+
         } catch (e) {
             console.log(e)
         }
@@ -47,7 +63,6 @@ export const PostsPage = () => {
     }
 
     const [posts, setPosts] = useState([])
-    const [likes, setLikes] = useState(false)
 
 
     useEffect(() => {
@@ -58,13 +73,7 @@ export const PostsPage = () => {
             .catch((e)=>{
                 console.log(e)
             });
-            LikeContent()
-            .then(like => {
-                setLikes(like)
-            })
-            .catch((e) =>{
-                console.log(e)
-            })
+            LikeContent(id)
     }, [])
 
     return (
@@ -92,6 +101,8 @@ export const PostsPage = () => {
                                         {post.likes}
                                     </Button>
                                     <Button 
+                                    type="text"
+                                    onClick={()=>{onClickLike()}}
                                     leftIcon={<TbArrowBigDown />} 
                                     colorScheme='teal' 
                                     variant='contenReaction'>

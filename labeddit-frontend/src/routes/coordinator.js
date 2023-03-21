@@ -1,11 +1,11 @@
 export const goToLoginPage = (navigator) => {
-    navigator('/login')
+    navigator('/')
 }
 export const goToPostsPage = (navigator) => {
     navigator('/posts')
 }
-export const goToReplyPage = (navigator) => {
-    navigator('/reply')
+export const goToReplyPage = (navigator, id) => {
+    navigator('/posts/${id}')
 }
 export const goToSignupPage = (navigator) => {
     navigator('/signup')
