@@ -1,7 +1,6 @@
-import { tokenToCSSVar } from "@chakra-ui/react"
 import axios from "axios"
 
-export const BASE_URL = 'https://labeddit-backend-irrb.onrender.com'
+export const BASE_URL = 'https://labeddit-backend-3pew.onrender.com'
 
 export const Login = async (body) => {
     const {data} = await axios.post(`${BASE_URL}/users/login`, body )
@@ -23,6 +22,16 @@ export const getPosts = async () => {
     return data
 }
 
+export const getPostById = async (id) => {
+    const {data} = await axios.get(`${BASE_URL}/posts/${id}`, 
+    {
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        } 
+    })
+    return data
+}
+
 export const CreatePost = async (body) => {
     const {data} = await axios.post(`${BASE_URL}/posts`, 
     body,
@@ -34,8 +43,18 @@ export const CreatePost = async (body) => {
     return data
 }
 
-export const ReplyContent = async () => {
-    const {data} = await axios.get(`${BASE_URL}/posts`, 
+export const ReplyPost = async (id, body) => {
+    const {data} = await axios.post(`${BASE_URL}/reply/${id}`, 
+    body,
+    {
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        } 
+    })
+    return data
+}
+export const getReplies = async (id) => {
+    const {data} = await axios.get(`${BASE_URL}/reply/${id}`,
     {
         headers: {
             Authorization: localStorage.getItem("labeddit.token")
@@ -44,8 +63,18 @@ export const ReplyContent = async () => {
     return data
 }
 
-export const LikeContent = async ( id, body) => {
+export const LikePost= async ( id, body) => {
     const {data} = await axios.put(`${BASE_URL}/posts/${id}/like`, 
+    body,
+    {
+        headers: {
+            Authorization: localStorage.getItem("labeddit.token")
+        } 
+    })
+    return data
+}
+export const LikeReply = async ( id, body) => {
+    const {data} = await axios.put(`${BASE_URL}/reply/${id}/like`, 
     body,
     {
         headers: {

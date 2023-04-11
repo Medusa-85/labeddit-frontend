@@ -5,7 +5,7 @@ export const goToPostsPage = (navigator) => {
     navigator('/posts')
 }
 export const goToReplyPage = (navigator, id) => {
-    navigator('/posts/${id}')
+    navigator(`/posts/${id}`)
 }
 export const goToSignupPage = (navigator) => {
     navigator('/signup')
