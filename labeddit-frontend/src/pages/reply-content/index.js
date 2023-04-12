@@ -20,6 +20,57 @@ export const ReplyPage = () => {
         reply: "",
     })
 
+
+    const onClickLike = async (id) => {
+        try{
+            const body = {
+                like: true
+            }
+            await axios.put(`${BASE_URL}/reply/${id}/like`, 
+            body,
+            {
+                headers: {
+                    Authorization: localStorage.getItem("labeddit.token")
+                } 
+            })
+            getReplies(id)
+            .then(data => {
+                setReplies(data)
+            })
+            .catch((e)=>{
+                console.log(e)
+            });
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const onClickDislike = async (id) => {
+        try{
+            const body = {
+                like: false
+            }
+            await axios.put(`${BASE_URL}/reply/${id}/like`, 
+            body,
+            {
+                headers: {
+                    Authorization: localStorage.getItem("labeddit.token")
+                } 
+            })
+            getReplies(id)
+            .then(data => {
+                setReplies(data)
+            })
+            .catch((e)=>{
+                console.log(e)
+            });
+
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     const onSubmit = async (e) => {
         e.preventDefault()
         try{
@@ -48,57 +99,19 @@ export const ReplyPage = () => {
         .catch((e)=>{
             console.log(e)
         });
-    }, [getPostById])     
+    }, [getPostById]) 
 
-    const onClickLike = async (id) => {
-        try{
-            const body = {
-                like: true
-            }
-            await axios.put(`${BASE_URL}/reply/${id}/like`, 
-            body,
-            {
-                headers: {
-                    Authorization: localStorage.getItem("labeddit.token")
-                } 
-            })
-            getReplies()
-            .then(data => {
-                setReplies(data)
-            })
-            .catch((e)=>{
-                console.log(e)
-            });
-
-        } catch (e) {
+    useEffect(() => {
+        getReplies(id)
+        .then(data => {
+            setReplies(data)
+        })
+        .catch((e)=>{
             console.log(e)
-        }
-    }
-    const onClickDislike = async (id) => {
-        try{
-            const body = {
-                like: false
-            }
-            await axios.put(`${BASE_URL}/reply/${id}/like`, 
-            body,
-            {
-                headers: {
-                    Authorization: localStorage.getItem("labeddit.token")
-                } 
-            })
-            getReplies()
-            .then(data => {
-                setReplies(data)
-            })
-            .catch((e)=>{
-                console.log(e)
-            });
+        });
+    }, [getReplies])     
 
-        } catch (e) {
-            console.log(e)
-        }
-    }
-   console.log(`postById ${postById[0]}`)
+   console.log(`replies ${replies.length}`)
 
     return (
         <PageContainer>
@@ -110,6 +123,28 @@ export const ReplyPage = () => {
                             <PostCardStyled>
                                 <h5>{post.creator.name}</h5>
                                 <h3>{post.content}</h3>
+                                <Stack direction='row' spacing={0}>
+                                    <Button 
+                                    leftIcon={<TbArrowBigUp />}
+                                    colorScheme='teal' 
+                                    variant='contenReaction'>
+                                        {post.likes}
+                                    </Button>
+                                    <Button 
+                                    type="text"
+                                    leftIcon={<TbArrowBigDown />}
+                                    colorScheme='teal' 
+                                    variant='contenReaction'>
+                                        {post.dislikes}
+                                    </Button>  
+                                    <Button 
+                                        rightIcon={<FaRegCommentAlt />} 
+                                        colorScheme='teal' 
+                                        variant='contenReaction'
+                                    >
+                                        {replies.length}
+                                    </Button>   
+                                </Stack>
                             </PostCardStyled>
                         ))}
                         <ContentInput
@@ -126,7 +161,7 @@ export const ReplyPage = () => {
                     {replies.map((reply, i) => (
                             <PostCardStyled key={i}>
                                 <h5>{reply.creator.name}</h5>
-                                <h3>{reply.content}</h3>
+                                <h3>{reply.reply}</h3>
                                 <Stack direction='row' spacing={0}>
                                     <Button 
                                     leftIcon={<TbArrowBigUp />}
@@ -143,13 +178,6 @@ export const ReplyPage = () => {
                                     variant='contenReaction'>
                                         {reply.dislikes}
                                     </Button>
-                                    <Button 
-                                        rightIcon={<FaRegCommentAlt />} 
-                                        colorScheme='teal' 
-                                        variant='contenReaction'
-                                        // onClick={()=>{goToReplyPage(navigate, post.id)}}
-                                    >
-                                    </Button>       
                                 </Stack>
                             </PostCardStyled>)
                       )}
