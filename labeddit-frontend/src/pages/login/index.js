@@ -15,6 +15,7 @@ export const LoginPage = () => {
         email: "",
         password: ""
     })
+    console.log(form.email)
 
     const [isEmailValid, setIsEmailValid] = useState(true)
     const [isPasswordValid, setIsPasswordValid] = useState(true)
