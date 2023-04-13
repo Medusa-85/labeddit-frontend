@@ -99,7 +99,7 @@ export const ReplyPage = () => {
         .catch((e)=>{
             console.log(e)
         });
-    }, [getPostById]) 
+    }, []) 
 
     useEffect(() => {
         getReplies(id)
@@ -109,9 +109,9 @@ export const ReplyPage = () => {
         .catch((e)=>{
             console.log(e)
         });
-    }, [getReplies])     
+    }, [replies.length])     
 
-   console.log(`replies ${replies.length}`)
+   console.log(`replies ${replies[0]}`)
 
     return (
         <PageContainer>
@@ -184,51 +184,5 @@ export const ReplyPage = () => {
                 </form>
             </FormContainer>
         </PageContainer>
-        // <PageContainer>
-        //     <PostContainerStyled>
-        //         <Header/>
-        //         <form onSubmit={onSubmit}>
-        //             <AddContentBox>
-        //                     <PostCardStyled >
-        //                         <h3>Conteúdo do post</h3>
-        //                         <Stack direction='row' spacing={4}>
-        //                             <Button 
-        //                             leftIcon={<TbArrowBigUp />} 
-        //                             rightIcon={<TbArrowBigDown />} 
-        //                             colorScheme='teal' 
-        //                             variant='contenReaction'>
-        //                                 Likes
-        //                             </Button>
-        //                             <Button 
-        //                                 rightIcon={<FaRegCommentAlt />} 
-        //                                 colorScheme='teal' 
-        //                                 variant='contenReaction'
-        //                             >Replies</Button>     
-        //                         </Stack>
-        //                     </PostCardStyled>
-        //                 <ContentInput/>
-        //                 <Button 
-        //                     type="submit"
-        //                     variant="addContent"
-        //                     >Responder</Button>
-        //                 {replyContents.map((content, i) => (
-        //                     <PostCardStyled key={i}>
-        //                         <h6>{content.creator_name}</h6>
-        //                         <h3>{content.content}</h3>
-        //                         <Stack direction='row' spacing={4}>
-        //                             <Button 
-        //                             leftIcon={<TbArrowBigUp />} 
-        //                             rightIcon={<TbArrowBigDown />} 
-        //                             colorScheme='teal' 
-        //                             variant='contenReaction'>
-        //                                 {content.like}
-        //                             </Button>    
-        //                         </Stack>
-        //                     </PostCardStyled>)
-        //                 )}
-        //             </AddContentBox> 
-        //         </form>
-        //     </PostContainerStyled>
-        // </PageContainer>
     )
 }
