@@ -4,21 +4,25 @@ import { PostContainerStyled, PostCardStyled } from "../posts/styled"
 import { useEffect, useState } from "react"
 import {TbArrowBigUp, TbArrowBigDown} from "react-icons/tb"
 import {FaRegCommentAlt} from "react-icons/fa"
-import { BASE_URL, getPostById, getPosts, getReplies, LikePost, ReplyPost } from "../../constants"
+import { BASE_URL, getPostById, getPosts, getReplies, LikePost, ReplyPost, validateReply } from "../../constants"
 import { ContentInput } from "../../components/inputs/content"
 import { Button, FormControl, FormHelperText, Stack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/use-form"
 import axios from "axios"
+import { ReplyInput } from "../../components/inputs/reply"
 
 export const ReplyPage = () => {
     const navigate = useNavigate()
     const {id} = useParams()
     const [postById, setPostById] = useState([])
     const [replies, setReplies] = useState([])
+
     const [form, onChangeInputs] = useForm({
-        reply: "",
+        reply: ""
     })
+
+    //const [isReplyValid, setIsReplyValid] = useState(true)
 
 
     const onClickLike = async (id) => {
@@ -111,7 +115,7 @@ export const ReplyPage = () => {
         });
     }, [replies.length])     
 
-   console.log(`replies ${replies[0]}`)
+   console.log(`form.reply ${form.reply}`)
 
     return (
         <PageContainer>
@@ -147,7 +151,7 @@ export const ReplyPage = () => {
                                 </Stack>
                             </PostCardStyled>
                         ))}
-                        <ContentInput
+                        <ReplyInput
                             value={form.reply}
                             onChange={onChangeInputs}
                         />

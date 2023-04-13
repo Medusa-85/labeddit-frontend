@@ -88,4 +88,5 @@ export const validateEmail = email => /[a-zA-Z0-9]+@[a-z0-9]{3}[.a-z]?/.test(ema
 export const validatePassword = password => /.{6,}/.test(password)
 export const validateName = name => /.{3,}/.test(name)
 export const validateContent = content => /.{3,}/.test(content)
+export const validateReply = reply => /.{3,}/.test(reply)
 
