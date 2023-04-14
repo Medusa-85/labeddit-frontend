@@ -22,9 +22,6 @@ export const ReplyPage = () => {
         reply: ""
     })
 
-    //const [isReplyValid, setIsReplyValid] = useState(true)
-
-
     const onClickLike = async (id) => {
         try{
             const body = {
@@ -78,8 +75,15 @@ export const ReplyPage = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
         try{
-            await ReplyPost({
+            await ReplyPost(
+                id, {
                 reply: form.reply
+            })
+            .then(data => {
+                setReplies(data)
+            })
+            .catch((e)=>{
+                console.log(e)
             })
             getReplies(id)
             .then(data => {
@@ -87,13 +91,16 @@ export const ReplyPage = () => {
             })
             .catch((e)=>{
                 console.log(e)
-            })
+            });
             alert("Resposta postada com sucesso")
+            console.log(replies)
         } catch (e) {
             console.log(e)
             alert(e.response.data)
         }  
     }
+
+    console.log(`replies ${replies.length}`)
     
     useEffect(() => {
         getPostById(id)
@@ -115,7 +122,7 @@ export const ReplyPage = () => {
         });
     }, [replies.length])     
 
-   console.log(`form.reply ${form.reply}`)
+    console.log(`replies 2 ${replies.length}`)
 
     return (
         <PageContainer>
@@ -135,7 +142,6 @@ export const ReplyPage = () => {
                                         {post.likes}
                                     </Button>
                                     <Button 
-                                    type="text"
                                     leftIcon={<TbArrowBigDown />}
                                     colorScheme='teal' 
                                     variant='contenReaction'>
@@ -162,8 +168,8 @@ export const ReplyPage = () => {
                     >
                         Responder
                     </Button>
-                    {replies.map((reply, i) => (
-                            <PostCardStyled key={i}>
+                    {replies && replies.map((reply) => {
+                            return <PostCardStyled key={reply.id}>
                                 <h5>{reply.creator.name}</h5>
                                 <h3>{reply.reply}</h3>
                                 <Stack direction='row' spacing={0}>
@@ -175,7 +181,6 @@ export const ReplyPage = () => {
                                         {reply.likes}
                                     </Button>
                                     <Button 
-                                    type="text"
                                     leftIcon={<TbArrowBigDown />} 
                                     onClick={()=>{onClickDislike(reply.id)}}
                                     colorScheme='teal' 
@@ -183,7 +188,7 @@ export const ReplyPage = () => {
                                         {reply.dislikes}
                                     </Button>
                                 </Stack>
-                            </PostCardStyled>)
+                            </PostCardStyled>}
                       )}
                 </form>
             </FormContainer>

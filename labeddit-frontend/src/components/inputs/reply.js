@@ -5,6 +5,7 @@ export const ReplyInput = ({ value, onChange }) => {
     return (
         <Input
             name="reply"
+            type="text"
             placeholder='Escreva seu comentário'
             value={value}
             onChange={onChange}

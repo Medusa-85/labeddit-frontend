@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export const BASE_URL = 'https://labeddit-backend-3pew.onrender.com'
+export const BASE_URL = 'http://localhost:3003'
 
 export const Login = async (body) => {
     const {data} = await axios.post(`${BASE_URL}/users/login`, body )
