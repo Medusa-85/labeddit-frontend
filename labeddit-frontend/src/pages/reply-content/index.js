@@ -18,7 +18,7 @@ export const ReplyPage = () => {
     const [postById, setPostById] = useState([])
     const [replies, setReplies] = useState([])
 
-    const [form, onChangeInputs] = useForm({
+    const [form, onChangeInputs, clearInputs] = useForm({
         reply: ""
     })
 
@@ -92,6 +92,7 @@ export const ReplyPage = () => {
             .catch((e)=>{
                 console.log(e)
             });
+            clearInputs()
             alert("Resposta postada com sucesso")
             console.log(replies)
         } catch (e) {
@@ -121,8 +122,6 @@ export const ReplyPage = () => {
             console.log(e)
         });
     }, [replies.length])     
-
-    console.log(`replies 2 ${replies.length}`)
 
     return (
         <PageContainer>

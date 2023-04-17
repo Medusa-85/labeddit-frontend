@@ -14,7 +14,7 @@ import axios from "axios"
 export const PostsPage = () => {
     const navigate = useNavigate()
 
-    const [form, onChangeInputs] = useForm({
+    const [form, onChangeInputs, clearInputs] = useForm({
         content: "",
     })
 
@@ -80,6 +80,7 @@ export const PostsPage = () => {
             .catch((e)=>{
                 console.log(e)
             })
+            clearInputs()
             alert("Comentário postado com sucesso")
         } catch (e) {
             console.log(e)
@@ -99,6 +100,8 @@ export const PostsPage = () => {
             });
     }, [])
 
+    console.log(`repliesCount ${posts[0]}`)
+
     return (
         <PageContainer>
             <FormContainer>
@@ -113,7 +116,7 @@ export const PostsPage = () => {
                             type="submit"
                             variant="addContent"
                             >Postar</Button>
-                        {posts.map((post, i) => (
+                        {posts && posts.map((post, i) => (
                             <PostCardStyled key={i}>
                                 <h5>{post.creator.name}</h5>
                                 <h3>{post.content}</h3>
@@ -139,6 +142,7 @@ export const PostsPage = () => {
                                         variant='contenReaction'
                                         onClick={()=>{goToReplyPage(navigate, post.id)}}
                                     >
+                                       {post.replies} 
                                     </Button>       
                                 </Stack>
                             </PostCardStyled>)
