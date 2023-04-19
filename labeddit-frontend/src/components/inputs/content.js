@@ -9,7 +9,7 @@ export const ContentInput = ({ value, onChange }) => {
             value={value}
             onChange={onChange}
             htmlSize='auto' 
-            width='80vw'
+            width='90vw'
             height='131px'
             borderRadius='12px'
             bg='#EDEDED'

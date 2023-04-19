@@ -11,7 +11,7 @@ export const PageContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
-    margin-top: 133px;
+    //margin-top: 133px;
     min-width: 40vw;
     max-width: 98vw;
     display: flex;

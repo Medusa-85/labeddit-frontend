@@ -6,7 +6,7 @@ import {FaRegCommentAlt} from "react-icons/fa"
 import {TbArrowBigUp, TbArrowBigDown} from "react-icons/tb"
 import { getPosts, CreatePost, BASE_URL, LikePost, validateContent } from "../../constants"
 import { ContentInput } from "../../components/inputs/content"
-import { Button, Stack } from "@chakra-ui/react"
+import { Button, FormControl, Stack } from "@chakra-ui/react"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "../../hooks/use-form"
 import axios from "axios"
@@ -100,58 +100,104 @@ export const PostsPage = () => {
             });
     }, [])
 
-    console.log(`repliesCount ${posts[0]}`)
-
     return (
         <PageContainer>
+            <Header/>
             <FormContainer>
-                <Header/>   
+            <PostContainerStyled>
                 <form onSubmit={onSubmit}>
-                    <AddContentBox>
-                        <ContentInput
-                            value={form.content}
-                            onChange={onChangeInputs}
-                        />
-                        <Button 
-                            type="submit"
-                            variant="addContent"
-                            >Postar</Button>
-                        {posts && posts.map((post, i) => (
-                            <PostCardStyled key={i}>
-                                <h5>{post.creator.name}</h5>
-                                <h3>{post.content}</h3>
-                                <Stack direction='row' spacing={0}>
-                                    <Button 
-                                    leftIcon={<TbArrowBigUp />}
-                                    onClick={()=>{onClickLike(post.id)}}
+                    <ContentInput
+                        value={form.content}
+                        onChange={onChangeInputs}
+                    />
+                    <Button 
+                        type="submit"
+                        variant="addContent"
+                        >Postar</Button>  
+                    {posts && posts.map((post, i) => (
+                        <PostCardStyled>
+                        <Stack key={i}>
+                            <h5>{post.creator.name}</h5>
+                            <h3>{post.content}</h3>
+                            <Stack direction='row' spacing={0}>
+                                <Button 
+                                leftIcon={<TbArrowBigUp />}
+                                onClick={()=>{onClickLike(post.id)}}
+                                colorScheme='teal' 
+                                variant='contenReaction'>
+                                    {post.likes}
+                                </Button>
+                                <Button 
+                                type="text"
+                                leftIcon={<TbArrowBigDown />} 
+                                onClick={()=>{onClickDislike(post.id)}}
+                                colorScheme='teal' 
+                                variant='contenReaction'>
+                                    {post.dislikes}
+                                </Button>
+                                <Button 
+                                    rightIcon={<FaRegCommentAlt />} 
                                     colorScheme='teal' 
-                                    variant='contenReaction'>
-                                        {post.likes}
-                                    </Button>
-                                    <Button 
-                                    type="text"
-                                    leftIcon={<TbArrowBigDown />} 
-                                    onClick={()=>{onClickDislike(post.id)}}
-                                    colorScheme='teal' 
-                                    variant='contenReaction'>
-                                        {post.dislikes}
-                                    </Button>
-                                    <Button 
-                                        rightIcon={<FaRegCommentAlt />} 
-                                        colorScheme='teal' 
-                                        variant='contenReaction'
-                                        onClick={()=>{goToReplyPage(navigate, post.id)}}
-                                    >
-                                       {post.replies} 
-                                    </Button>       
-                                </Stack>
-                            </PostCardStyled>)
-                      )}
-                    </AddContentBox>
-                    
-                    
+                                    variant='contenReaction'
+                                    onClick={()=>{goToReplyPage(navigate, post.id)}}
+                                >
+                                   {post.replies} 
+                                </Button>       
+                            </Stack>
+                        </Stack>
+                        </PostCardStyled>)
+                  )}
                 </form>
+            </PostContainerStyled>
             </FormContainer>
         </PageContainer>
     )
 }
+
+{/* <PageContainer>
+        
+        <FormContainer>
+        <Header/> 
+            <form onSubmit={onSubmit}>
+                    <ContentInput
+                        value={form.content}
+                        onChange={onChangeInputs}
+                    />
+                    <Button 
+                        type="submit"
+                        variant="addContent"
+                        >Postar</Button>
+                    {posts && posts.map((post, i) => (
+                        <Stack key={i}>
+                            <h5>{post.creator.name}</h5>
+                            <h3>{post.content}</h3>
+                            <Stack direction='row' spacing={0}>
+                                <Button 
+                                leftIcon={<TbArrowBigUp />}
+                                onClick={()=>{onClickLike(post.id)}}
+                                colorScheme='teal' 
+                                variant='contenReaction'>
+                                    {post.likes}
+                                </Button>
+                                <Button 
+                                type="text"
+                                leftIcon={<TbArrowBigDown />} 
+                                onClick={()=>{onClickDislike(post.id)}}
+                                colorScheme='teal' 
+                                variant='contenReaction'>
+                                    {post.dislikes}
+                                </Button>
+                                <Button 
+                                    rightIcon={<FaRegCommentAlt />} 
+                                    colorScheme='teal' 
+                                    variant='contenReaction'
+                                    onClick={()=>{goToReplyPage(navigate, post.id)}}
+                                >
+                                   {post.replies} 
+                                </Button>       
+                            </Stack>
+                        </Stack>)
+                  )}
+            </form>
+        </FormContainer>
+    </PageContainer> */}

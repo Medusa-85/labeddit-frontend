@@ -160,13 +160,13 @@ export const ReplyPage = () => {
                             value={form.reply}
                             onChange={onChangeInputs}
                         />
-                    </FormControl>
-                    <Button 
-                        type="submit"
-                        variant="formMain"
-                    >
-                        Responder
-                    </Button>
+                        </FormControl>
+                        <Button 
+                            type="submit"
+                            variant="formMain"
+                        >
+                            Responder
+                        </Button>
                     {replies && replies.map((reply) => {
                             return <PostCardStyled key={reply.id}>
                                 <h5>{reply.creator.name}</h5>

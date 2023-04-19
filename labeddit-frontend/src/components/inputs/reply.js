@@ -5,15 +5,24 @@ export const ReplyInput = ({ value, onChange }) => {
     return (
         <Input
             name="reply"
-            type="text"
             placeholder='Escreva seu comentário'
             value={value}
             onChange={onChange}
             htmlSize='auto' 
-            width='80vw'
+            width='90vw'
             height='131px'
             borderRadius='12px'
             bg='#EDEDED'
         />
     )
 }
+
+            // name="content"
+            // placeholder='Escreva seu comentário'
+            // value={value}
+            // onChange={onChange}
+            // htmlSize='auto' 
+            // width='90vw'
+            // height='131px'
+            // borderRadius='12px'
+            // bg='#EDEDED'
