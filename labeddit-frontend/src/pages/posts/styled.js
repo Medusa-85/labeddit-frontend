@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const PostContainerStyled = styled.div`
-    margin-top: 126px;
+    //margin-top: 126px;
     min-width: 40vw;
     max-width: 98vw;
     display: flex;
@@ -21,13 +21,13 @@ export const PostCardStyled = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    width: 80vw;
+    width: 90vw;
     height: auto;
     min-width: 40vw;
     max-width: 98vw;
     border: 1px solid #E0E0E0;
     border-radius: 12px;
-    background-color: #FFFFFF;
+    background-color: #FBFBFB;
     padding: 9px 10px;
     
 `
